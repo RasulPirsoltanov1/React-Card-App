@@ -30,19 +30,28 @@ function App() {
   const [val, setVal] = useState(0);
   const [list, setList] = useState(arr); // Use an array to store CardPro components
 
-  // const addCard = () => {
-  //   setCards([...cards, <CardPro className="cardPro" />]);
-  // };
 
-
+  let mountain = {
+    name: "Everest",
+    height: 8848,
+    location: "nepal"
+  }
+  let array = ["213", 2, 2111, 3, 3.11];
   function click() {
     let title = document.getElementById("inputTitle").value;
     let par = document.getElementById("inputPar").value;
-    if(title!=""&&par!=""){
+    if (title != "" && par != "") {
       setList([...list, { title, par }]);
-      document.getElementById("inputTitle").value="";
-      document.getElementById("inputPar").value="";
+      document.getElementById("inputTitle").value = "";
+      document.getElementById("inputPar").value = "";
     }
+  }
+
+  const deleteHandler = (index) => {
+    let filteredList = list.filter((x, i) => {
+      return index !== i;
+    });
+    setList(filteredList);
   }
 
   return (
@@ -65,7 +74,7 @@ function App() {
       </Stack>
       <div className="card-container">
         {list.map(({ title, par }, index) => (
-          <CardPro title={title} par={par} key={"CardIndex" + index}></CardPro>
+          <CardPro title={title} par={par} key={"CardIndex" + index} onDelete={()=>deleteHandler(index)}></CardPro>
         ))}
       </div>
     </Container>

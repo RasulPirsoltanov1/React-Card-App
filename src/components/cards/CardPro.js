@@ -1,7 +1,6 @@
 import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
 import "./CardPro.css"
-const CardPro = ({title, par}) => {
-
+const CardPro = ({ title, par, onDelete }) => {
     return (
         <Card shadow="sm" padding="lg" radius="md" withBorder className='cardPro'>
             <Card.Section>
@@ -20,10 +19,10 @@ const CardPro = ({title, par}) => {
             </Group>
 
             <Text size="sm" color="dimmed">
-               {par}
+                {par}
             </Text>
-
-            <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+            <Button color="red" onClick={onDelete} mt="md" radius="md">Delete</Button>
+            <Button variant="light" color="blue" mt="md" radius="md">
                 Book classic tour now
             </Button>
         </Card>
