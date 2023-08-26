@@ -38,7 +38,11 @@ function App() {
   function click() {
     let title = document.getElementById("inputTitle").value;
     let par = document.getElementById("inputPar").value;
-    setList([...list, { title, par }]);
+    if(title!=""&&par!=""){
+      setList([...list, { title, par }]);
+      document.getElementById("inputTitle").value="";
+      document.getElementById("inputPar").value="";
+    }
   }
 
   return (
