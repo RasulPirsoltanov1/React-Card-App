@@ -3,6 +3,12 @@ import './App.css';
 import Crad from './components/cards';
 import Test from './test/test';
 import { useState } from 'react';
+import { Checkbox, Input } from '@mantine/core';
+import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
+import CardPro from './components/cards/CardPro';
+import { Textarea } from '@mantine/core';
+import { Container } from '@mantine/core';
+import { Stack } from '@mantine/core';
 
 
 let arr = [
@@ -22,20 +28,44 @@ let arr = [
 
 function App() {
   const [val, setVal] = useState(0);
+  const [list, setList] = useState(arr); // Use an array to store CardPro components
+
+  // const addCard = () => {
+  //   setCards([...cards, <CardPro className="cardPro" />]);
+  // };
+
+
+  function click() {
+    let title = document.getElementById("inputTitle").value;
+    let par = document.getElementById("inputPar").value;
+    setList([...list, { title, par }]);
+  }
+
   return (
-    <div>
-      <h3>{val}</h3>
-      <button onClick={() => {
-        setVal(val + 1);
-      }}>Change Value</button>
-      Salam dunya bu <Test />
-      <div className="cards">
-        {arr.map(function (arr, id) {
-          return <Crad key={id} title={arr.title} par={arr.par} id={id} val={val} />
-        })}
+    <Container>
+      <Stack h={300} sx={(theme) => ({ backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] })}>
+        <h1>Card Application</h1>
+        <Input.Wrapper label="Title">
+          <Input id='inputTitle'
+            placeholder="Title..."
+            radius="lg"
+          />
+        </Input.Wrapper>
+        <Textarea
+          id='inputPar'
+          placeholder="Your comment"
+          label="Your comment"
+          withAsterisk
+        />
+        <Button variant="gradient" gradient={{ from: 'teal', to: 'lime', deg: 105 }} onClick={click}>Add Card</Button>
+      </Stack>
+      <div className="card-container">
+        {list.map(({ title, par }, index) => (
+          <CardPro title={title} par={par} key={"CardIndex" + index}></CardPro>
+        ))}
       </div>
-    </div>
+    </Container>
+
   );
 }
-
 export default App;
